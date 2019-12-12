@@ -1,0 +1,16 @@
+---
+- name: Download common variables
+  tags:
+  - always
+  include_vars:
+    file: 'common_vars/hyperv.yaml'
+
+- include: create_vm.yaml
+
+- include: import_vm.yaml
+
+- include: remove_vm.yaml
+
+- include: power_vm.yaml
+
+- include: get_vm_ip.yaml

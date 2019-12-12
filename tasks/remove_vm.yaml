@@ -1,0 +1,13 @@
+- name: Remove VM
+  win_hyperv_remove:
+    name: '{{ vm_name }}'
+    force: true
+  tags: 
+  - remove
+
+- name: Remove VM vhdx directory
+  win_file:
+    path: '{{ vm_path }}'
+    state: absent
+  tags: 
+  - remove

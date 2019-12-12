@@ -1,0 +1,33 @@
+- name: Prepare direcorty for new VM  
+  win_file:
+    path: '{{ vm_path }}'
+    state: directory
+  tags: 
+  - create
+  
+- name: Copy from original image
+  win_copy:
+    src: '{{ vhdx_path_original }}'
+    dest: '{{ vhdx_path }}'
+  tags: 
+  - create
+
+- name: Create VM  
+  win_hyperv_create_vm:
+    name: '{{ vm_name }}'
+    memory: '{{ vm_memory }}'
+    cpu: '{{ vm_cpu }}'
+    vhdx: '{{ vhdx_path }}'
+    vmpath: '{{ vm_path }}'
+    generation: '{{ generation }}'
+    switch_name: '{{ default_switch }}'
+    start: true
+    state: present
+  tags: 
+  - create
+
+- name: Wait VM to obtain IP
+  pause:
+    seconds: 60
+  tags:
+  - create

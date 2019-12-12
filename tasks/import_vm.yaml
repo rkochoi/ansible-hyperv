@@ -1,0 +1,24 @@
+- name: Prepare direcorty for new VM  
+  win_file:
+    path: '{{ vm_path }}'
+    state: directory
+  tags: 
+  - import
+
+- name: Import Slave VM  
+  win_hyperv_import:
+    name: '{{ vm_name }}'
+    vmcx: '{{ vmcx_path }}\{{ vmcx }}'
+    vmpath: '{{ vm_path }}'
+    copy: true
+    generateid: true
+    start: true
+    state: present
+  tags: 
+  - import
+
+- name: Wait VM to obtain IP
+  pause:
+    seconds: 30
+  tags:
+  - import

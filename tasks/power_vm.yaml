@@ -1,0 +1,7 @@
+- name: Perform Turn {{ action }} action
+  win_hyperv_turn_vm:
+    name: '{{ vm_name }}'
+    turn: '{{ power }}'
+    force: true
+  tags:
+  - power

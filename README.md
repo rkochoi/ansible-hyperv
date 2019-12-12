@@ -1,2 +1,6 @@
-# ansible-hyperv
-Ansible module to interact with Windows Hyper-V
+# Ansible-HyperV
+
+This modules provides functionality to create, import, remove Hyper-V virtual machines.
+
+
+

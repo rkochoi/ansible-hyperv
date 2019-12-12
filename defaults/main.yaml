@@ -1,0 +1,10 @@
+# VM variables
+vm_name: 'win10' # This variable should be passed as extra argument to playbook from Jenkins
+vm_memory: '2GB'
+vm_cpu: 2
+vm_path: '{{ vm_store }}\{{ vm_name }}'
+vhdx_path: '{{ vm_path }}\{{ vm_name }}.vhdx'
+generation: 1
+default_switch: 'Default Switch'
+power: 'on' # This variable should be passed as extra argument to playbook from Jenkins  
+tmp_file: '{{ vm_path }}\ipv4_{{ vm_name }}'

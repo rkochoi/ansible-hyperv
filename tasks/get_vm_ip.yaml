@@ -1,0 +1,35 @@
+- name: Get VM ip address
+  win_hyperv_vm_ip:
+    name: '{{ vm_name }}'
+  register: result
+  tags: 
+  - get_vm_ip
+
+- name: Create tmp file
+  win_file:
+    path: '{{ tmp_file }}'
+    state: touch
+  tags: 
+  - get_vm_ip
+  
+- name: Write IP to file
+  win_lineinfile:
+    path: '{{ tmp_file }}'
+    line: '{{ result.ipv4 }}'
+  tags: 
+  - get_vm_ip
+
+- name: Store file in workspace
+  fetch:
+    src: '{{ tmp_file }}'
+    dest: '{{ playbook_dir }}/inventory/slaves/ipv4-{{ vm_name }}'
+    flat: yes
+  tags: 
+  - get_vm_ip
+
+- name: Cleanup
+  win_file:
+    path: '{{ tmp_file }}'
+    state: absent
+  tags: 
+  - get_vm_ip
